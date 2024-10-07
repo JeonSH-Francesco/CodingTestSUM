@@ -91,6 +91,9 @@ int main() {
 }
 
 /*
+ref: https://www.acmicpc.net/problem/9935
+
+결과:
 Test Case 1 Result: mirkovniz
 Test Case 2 Result: FRULA
 */
