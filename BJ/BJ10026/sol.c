@@ -50,6 +50,17 @@ void dfs(int x, int y, char color, int color_blind) {
     }
 }
 
+void print_grid() {
+    printf("현재 그리드 상태:\n");
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            printf("%c ", visited[i][j] ? '*' : grid[i][j]); // 방문한 곳은 '*'로 표시
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 int count_regions(int color_blind) {
     int count = 0;
     memset(visited, 0, sizeof(visited)); // 방문 배열 초기화
@@ -66,18 +77,6 @@ int count_regions(int color_blind) {
     }
     return count;
 }
-
-void print_grid() {
-    printf("현재 그리드 상태:\n");
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            printf("%c ", visited[i][j] ? '*' : grid[i][j]); // 방문한 곳은 '*'로 표시
-        }
-        printf("\n");
-    }
-    printf("\n");
-}
-
 
 int main() {
     scanf("%d", &N); // 그리드 크기 입력
