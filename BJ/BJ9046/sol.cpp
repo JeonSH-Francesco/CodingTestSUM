@@ -55,6 +55,8 @@ int main() {
 
 }
 /*
+ref : https://www.acmicpc.net/problem/9046
+
 입력
 3
 asvdge ef ofmdofn
