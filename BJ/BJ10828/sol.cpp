@@ -78,6 +78,8 @@ int main() {
 
 
 /*
+ref : https://www.acmicpc.net/problem/10828
+
 입력과 출력
 
 14
