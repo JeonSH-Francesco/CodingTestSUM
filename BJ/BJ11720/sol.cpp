@@ -35,6 +35,8 @@ int main() {
 	return 0;
 }
 /*
+ref : https://www.acmicpc.net/problem/11720
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
