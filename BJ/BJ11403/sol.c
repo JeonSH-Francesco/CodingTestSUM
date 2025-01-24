@@ -34,35 +34,35 @@ void dfs(int start,int node){
 }
 
 int main() {
-
     scanf("%d", &n);
-    
-    //그래프 입력 받기
+
+    // 그래프 입력 받기
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            scanf("%d",&graph[i][j]);
+            scanf("%d", &graph[i][j]);
         }
     }
 
-    //경로 탐색
-    for (int i = 0; i < n; i++) {
-        for (int j =0; j< n; j++) {
-            visited[j] = false; //방문 배열 초기화
-        }
-        dfs(i, i);
-    }
-
-    printf("\n");
-    //결과 출력
+    // 경로 탐색
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf("%d",result[i][j]);
+            visited[j] = false; // 방문 배열 초기화
+        }
+        dfs(i, i); // i번 노드에서 시작하는 경로 탐색
+    }
+
+    // 결과 출력
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d", result[i][j]);
+            if (j < n - 1) printf(" "); // 마지막 숫자 뒤에는 공백 출력하지 않음
         }
         printf("\n");
     }
 
     return 0;
 }
+
 
 /*
 https://www.acmicpc.net/problem/11403
