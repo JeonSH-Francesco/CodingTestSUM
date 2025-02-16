@@ -64,6 +64,8 @@ int main() {
 
 
 /*
+ref : https://school.programmers.co.kr/learn/courses/30/lessons/17684
+
 입력: KAKAO
 출력: [11, 1, 27, 15]
 
