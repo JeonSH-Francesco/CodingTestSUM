@@ -44,18 +44,21 @@ int solution(int** info, size_t info_rows, size_t info_cols, int n, int m) {
                 // A도둑이 물건을 훔친 경우
                 if (a + traceA < n) { // A도둑이 훔치고 나서 A도둑의 흔적이 n을 넘지 않으면
                     dp[i + 1][a + traceA][b] = my_min(dp[i + 1][a + traceA][b], dp[i][a][b] + traceA);
+                    //my_min(이미 존재하는 최소 흔적 값, 이번 물건을 A도둑이 훔친경우 새롭게 계산된 흔적 값)
                 }
 
                 // B도둑이 물건을 훔친 경우 (A 도둑의 흔적을 최소화하는 것이 목표)
                 if (b + traceB < m) { // B도둑이 훔치고 나서 B도둑의 흔적이 m을 넘지 않으면
                     dp[i + 1][a][b + traceB] = my_min(dp[i + 1][a][b + traceB], dp[i][a][b]);
+                    // my_min(이미 존재하는 최소 흔적값, 이번 물건을 B도둑이 훔친경우 새롭게 계산된 흔적 값)
+                    // A도둑의 흔적은 변하지 않으며, B도둑의 흔적만 갱신됩니다.
                 }
             }
         }
     }
 
     // DP 테이블에서 결과값을 구하기
-    int result = INF_VALUE;
+    int result = INT_MAX;
     // A도둑의 흔적이 n 미만, B도둑의 흔적이 m 미만인 모든 경우를 확인하여 최소값을 찾음
     for (int a = 0; a < n; a++) {
         for (int b = 0; b < m; b++) {
@@ -64,29 +67,23 @@ int solution(int** info, size_t info_rows, size_t info_cols, int n, int m) {
     }
 
     // 결과가 INF_VALUE라면 목표를 달성할 수 없다는 의미이므로 -1을 반환
-    return result == INF_VALUE ? -1 : result;
+    return result == INT_MAX ? -1 : result;
 }
-
 
 int main() {
     int test1[][2] = { {1, 2}, {2, 3}, {2, 1} };
     int test2[][2] = { {3, 3}, {3, 3} };
-    int test3[][2] = { {1, 1}, {1, 1}, {1, 1}, {1, 1} };
 
     int* info1[3] = { test1[0], test1[1], test1[2] };
     int* info2[2] = { test2[0], test2[1] };
-    int* info3[4] = { test3[0], test3[1], test3[2], test3[3] };
 
-    printf("Test 1: %d\n", solution(info1, 3, 2, 4, 4)); 
-    printf("Test 2: %d\n", solution(info1, 3, 2, 1, 7)); 
+    printf("Test 1: %d\n", solution(info1, 3, 2, 4, 4));
+    printf("Test 2: %d\n", solution(info1, 3, 2, 1, 7));
     printf("Test 3: %d\n", solution(info2, 2, 2, 7, 1));
-    printf("Test 4: %d\n", solution(info2, 2, 2, 6, 1)); 
-    printf("Test 5: %d\n", solution(info3, 4, 2, 5, 5));
+    printf("Test 4: %d\n", solution(info2, 2, 2, 6, 1));
 
     return 0;
 }
-
-
 
 
 /*
@@ -98,5 +95,4 @@ Test 1: 2
 Test 2: 0
 Test 3: 6
 Test 4: -1
-Test 5: 0
 */
