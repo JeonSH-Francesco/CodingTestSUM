@@ -89,7 +89,7 @@ int main() {
         }
         free(codes1);
     }
-
+    printf("\n");
     // 테스트 케이스 2: 중복된 접두사가 있는 도시들
     char* cities2[] = { "DAEGU", "DAEJEON", "DAE", "DE" };
     size_t city_len2 = sizeof(cities2) / sizeof(cities2[0]);
@@ -125,6 +125,7 @@ S
 D
 J
 B
+
 Test Case 2:
 DAEG
 DAEJ
