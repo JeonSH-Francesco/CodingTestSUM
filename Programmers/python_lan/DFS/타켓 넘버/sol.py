@@ -16,3 +16,10 @@ def solution(numbers, target):
         return count
     return dfs(0,0) #탐색 시작
 
+test_case1=[1, 1, 1, 1, 1]
+test_case2=[4, 1, 2, 1]
+
+
+print(solution(test_case1,3))
+print(solution(test_case2,4))
+
