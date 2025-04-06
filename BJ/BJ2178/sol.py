@@ -28,7 +28,7 @@ arr=[list(map(int,input())) for _ in range(N)] #미로 정보 입력
 #------BFS 실행 ------
 ans = bfs(0, 0, N-1, M-1)  # (0,0)부터 (N-1,M-1)까지 최단 거리 계산
 print(ans)  # 결과 출력
-/*
+'''
 https://www.acmicpc.net/problem/2178
 4 6
 101111
@@ -36,4 +36,4 @@ https://www.acmicpc.net/problem/2178
 101011
 111011
 15
-*/
+'''
