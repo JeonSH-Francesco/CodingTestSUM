@@ -46,3 +46,16 @@ bfs(V)
 # 결과 출력 *의미는 리스트를 공백으로 구분해서 출력하겠다는 의미
 print(*ans_dfs)
 print(*ans_bfs)
+
+/*
+https://www.acmicpc.net/problem/1260
+5 5 3
+5 4
+5 2
+1 2
+3 4
+3 1
+
+3 1 2 5 4
+3 1 4 2 5
+*/
