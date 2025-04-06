@@ -47,7 +47,7 @@ bfs(V)
 print(*ans_dfs)
 print(*ans_bfs)
 
-/*
+'''
 https://www.acmicpc.net/problem/1260
 5 5 3
 5 4
@@ -58,4 +58,4 @@ https://www.acmicpc.net/problem/1260
 
 3 1 2 5 4
 3 1 4 2 5
-*/
+'''
