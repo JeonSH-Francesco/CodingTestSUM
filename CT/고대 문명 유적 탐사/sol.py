@@ -38,12 +38,12 @@ def bfs(arr,v,si,sj,clr):
         if clr==1:  # 0으로 초기화
             for i,j in sset:
                 arr[i][j]=0 #해당 좌표들을 0으로 초기화(제거)
-        return cnt #유물이면: cnt 리턴
-    else:           
+        return cnt #유물이면: cnt 리턴->clr==0인 경우에도 return 함. (이유 : 중요 포인트->if clr==1: indentation이 같은 위치이기에)
+    else:#cnt<3인 경우
         return 0 # 3개 미만이면 0리턴
      
 #유물이 얼마나 사라지는지 확인
-def count_clear(arr, clr):  # clr==1인 경우 3개이상값들을 0으로 clear
+def count_clear(arr, clr):  # clr==1인 경우 3개이상 값들을 0으로 clear
     v = [[0]*5 for _ in range(5)]
     cnt = 0
     for i in range(5):
