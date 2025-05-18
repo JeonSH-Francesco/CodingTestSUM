@@ -22,7 +22,56 @@ Day 5: canNotLayDragon = 0, canLayDragon = 3, Eggs = 5-> Total : 8
 Day 6: canNotLayDragon = 1, canLayDragon = 4, Eggs = 7-> Total : 12
 
 */
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
 
+int solution(int n) {
+    long long laidEggs[46] = { 0 };       // day별 낳은 알 수
+    long long dragonAgeCount[5] = { 0 };  // 나이 0~4인 드래곤 수 (0: 당일 부화한 드래곤, 4: 은퇴한 드래곤)
+    long long total = 0;
+
+    laidEggs[0] = 1;  // 0일차에 알 1개 낳음 (초기 알)
+
+    for (int day = 0; day <= n; day++) {
+        // 1) 부화: 2일 전에 낳은 알이 오늘 부화해 새 드래곤 생성
+        long long hatched = (day >= 2) ? laidEggs[day - 2] : 0;
+
+        // 2) 나이 증가: 나이 4인 드래곤(은퇴)은 사라지고, 나머지는 한 살 증가
+        for (int age = 4; age > 0; age--) {
+            dragonAgeCount[age] = dragonAgeCount[age - 1];
+        }
+        dragonAgeCount[0] = hatched;
+
+        // 3) 산란 가능한 드래곤 수 (나이 0~3)
+        long long canLay = 0;
+        for (int age = 0; age <= 3; age++) {
+            canLay += dragonAgeCount[age];
+        }
+
+        // 4) 오늘 낳은 알 수 = 산란 가능한 드래곤 수 (0일차 제외)
+        if (day > 0) {
+            laidEggs[day] = canLay;
+        }
+
+        // 5) 살아있는 알 수 = 오늘과 어제 낳은 알 (알은 2일까지만 존재)
+        long long eggsAlive = laidEggs[day] + (day > 0 ? laidEggs[day - 1] : 0);
+
+        // 6) 총합 = 산란 가능한 드래곤 + 은퇴한 드래곤 + 살아있는 알
+        total = canLay + dragonAgeCount[4] + eggsAlive;
+    }
+
+    return (int)total;
+}
+
+int main() {
+    for (int n = 0; n <= 7; n++) {
+        int total = solution(n);
+        printf("Total for n = %d: %d\n", n, total);
+    }
+    return 0;
+}
+
+/*
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdbool.h>
@@ -79,8 +128,6 @@ int main() {
     }
     return 0;
 }
-
-/*
 
 n = 0
 Day 0: Cannot Lay = 0, Can Lay = 0, Eggs = 1
