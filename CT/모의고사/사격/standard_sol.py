@@ -1,7 +1,6 @@
 import sys
 
-sys.stdin = open('input.txt','r')
-
+sys.stdin = open("C:/python/repos_python/SamSung Camp/0831/input.txt","r")
 results=[] #각 테스트 케이스 저장
 
 
@@ -172,7 +171,7 @@ while True:
             rotate(*values)
     results.append(total_score)
 
-for i, score in enumerate(results,1):
+for i, score in enumerate(results):
     print(f"#{i} {score}")
     
 
@@ -227,8 +226,3 @@ for i, score in enumerate(results,1):
 0
 
 '''
-
-출력
-#1 10
-#2 10
-#3 0
