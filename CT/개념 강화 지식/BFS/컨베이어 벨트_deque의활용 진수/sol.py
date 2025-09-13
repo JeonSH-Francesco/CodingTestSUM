@@ -17,25 +17,27 @@ for _ in range(t):
 
 print(*u)
 print(*d)
+
 '''
-예제 1
-입력
+n, t = map(int, input().split())
+u = list(map(int, input().split()))
+d = list(map(int, input().split()))
 
-3 1
-1 2 3
-6 5 1
-출력
+for _ in range(t):
+    #가장 오른쪽에 있는 숫자를 따로 temp에 저장한다.
+    temp=u[n-1]
+    #역으로 배열 세팅
+    for i in range(n-1,0,-1):
+        u[i]=u[i-1]
+    #아래에서 올라온 것 추가
+    u[0]=d[n-1]
 
-1 1 2
-3 6 5
-예제 2
-입력
+    for i in range(n-1,0,-1):
+        d[i]=d[i-1]
+    #위에서 아래로 내려간 것(temp) 추가
+    d[0]=temp
+print(*u)
+print(*d)
 
-3 3
-1 2 3
-6 5 1
-출력
 
-6 5 1
-1 2 3
 '''
