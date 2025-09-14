@@ -40,7 +40,7 @@ def calc_art_score(A):
     group_cnt=0
     for i in range(n):
         for j in range(n):
-            #A라는 배열에 대하여 전부 순회하면서 처음 -1로 초기화 된 visited를 group_cnt+1을 해서 0으로 초기화 작업
+            #A라는 배열에 대하여 전부 순회하면서 처음 -1로 초기화 된 visited를 group_cnt+1을 해서 그룹 라벨링
             if visited[i][j]==-1:
                 group_cnt+=1
                 #그 후 BFS로 관련 변수들 던져서 계산 진행
