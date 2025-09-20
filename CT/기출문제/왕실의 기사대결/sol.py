@@ -124,7 +124,7 @@ def dfs_knight(idx:int, direction:int)->bool:
             not visited[next_idx]
             and knights[next_idx].is_alive() 
             and knights[next_idx].is_pushed(
-                other=knighs[idx],
+                other=knights[idx],
                 direction=direction
             )
         ):
