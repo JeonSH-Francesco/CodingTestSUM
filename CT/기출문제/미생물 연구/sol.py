@@ -25,7 +25,7 @@ def insert(num,r1,c1,r2,c2):
 
 '''
 2. 이동
-- 미생물 옮기는 순서 : 1. 면적이 널음. 2. 먼저 투입된 것
+- 미생물 옮기는 순서 : 1. 면적이 넓음. 2. 먼저 투입된 것
 - 모양을 유지한 채로 옮겨야 함. -> 옮길 수 없으면 버림
 - x좌표가 작, y좌표가 작
 - ★ 구현
@@ -82,13 +82,17 @@ def get_possible_position(group):
                 if not (in_range(nx,ny) and A[nx][ny]==0):
                     flag=False
                     break
+            #시작점 반환
             if flag:
                 return i,j
     #만약에 위치를 다 놓았는데, 놓을 위치가 없으면 None을 반환한다.
     return None, None
 
+#group을 만들어야 하므로 get_groups()를 만들고
+#정렬을 해 줄 것이다.
 def move():
     groups = get_groups()
+    #정렬의 기준은 첫 번째 기준은 많은 영역을 차지하고 있는 것에 대하여 내림차순, 가장 먼저 투입된 미생물 순으로 오름 차순
     groups.sort(key=lambda x: (-len(x[1]), x[0]))
 
     for num, group in groups:
@@ -143,10 +147,37 @@ for turn in range(1,Q+1):
     }
     
     # for a in A:
-    #     print(*a)
+    #      print(*a)
     # print()
     
     #3. 기록
     print(get_score(group_cnt))
 
 
+'''
+입력
+
+
+
+8 4
+2 2 5 6
+2 3 5 8
+2 0 5 3
+1 1 6 6
+나의 출력
+
+
+
+0
+165
+108
+325
+정답
+
+
+
+0
+165
+108
+325
+'''
