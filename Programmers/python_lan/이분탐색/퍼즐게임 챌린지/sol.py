@@ -1,39 +1,44 @@
-def calculate_time(diffs,times,level):
-    total_time=0 #전체 걸린 시간
-    n=len(diffs) #전체 턴수 계산
+def calculate_time(diffs, times, level):
+    total_time = 0  # 누적 총 걸린 시간
+    n = len(diffs)   # 문제 개수
     
     for i in range(n):
-        if diffs[i]<=level: #레벨이 모든 난이도보다 큰 경우 전부 손쉽게 풀 수 있으므로
-            total_time+=times[i] #틀리지 않고 걸리는 시간을 더해주면 된다.
-        else: #그렇지 않은 경우
-            if i >0: 
-                prev_time=times[i-1] #이전 시간 계산하기
-            else:
-                prev_time=0
-                
-        mistakes=diffs[i]-level #문제 조건에 따라 난이도와 현재 레벨의 차이만큼 틀리므로 mistakes 정의하고
-        total_time=mistakes*(times[i]+prev_time)+times[i] #total_time을 계산
-        
-        if total_time>10**18: #만약 total_time이 엄청 큰 경우는 그냥 return
-            return total_time # 충분히 큰 수로 제한 (안전장치)
-    
-    return total_time #return 총 걸린 시간
-    
-def solution(diffs, times, limit):
-    left, right=1, 1000000
-    answer=right
-    #left, right, answer를 초기화 해준다
-    
-    #이분 탐색->최솟값이 되는 경우가 될 때가지
-    while left<=right:
-        mid=(left+right)//2
-        #제한된 시간 안에 풀 수 있는 경우->최솟값을 구하기 위해 right를 줄여서 계산한다.
-        if calculate_time(diffs,times,mid)<=limit:
-            answer=mid
-            right=mid-1
-        #제한된 시간 안에 풀지 못하는 경우->최솟값을 구하기 위해 left를 늘려서 계산한다.
+        # 현재 레벨이 문제 난이도보다 높거나 같으면
+        if diffs[i] <= level:
+            total_time += times[i]  # 틀리지 않고 문제 해결
         else:
-            left=mid+1
+            # 난이도 > 레벨이면 틀림 발생
+            mistakes = diffs[i] - level  # 틀리는 횟수
+            
+            # 이전 문제 시간을 가져와야 하는데 첫 문제면 0
+            if i > 0:
+                prev_time = times[i-1]
+            else:
+                prev_time = 0
+            
+            # 틀린 횟수만큼 시간 누적 + 현재 문제 시간 추가
+            total_time += mistakes * (times[i] + prev_time) + times[i]
+        
+        # 매우 큰 경우 제한
+        if total_time > 10**18:
+            return total_time
+    
+    return total_time
+
+def solution(diffs, times, limit):
+    answer = 0
+    left, right = 1, 100000  # 레벨 탐색 범위
+    
+    # 이분 탐색
+    while left <= right:
+        mid = (left + right) // 2  # 현재 레벨 가정
+        # mid 레벨로 모든 문제를 limit 시간 내 해결 가능한지 확인
+        if calculate_time(diffs, times, mid) <= limit:
+            answer = mid        # 가능하면 answer 갱신
+            right = mid - 1     # 더 낮은 레벨도 가능한지 확인
+        else:
+            left = mid + 1      # 불가능하면 레벨 올리기
+    
     return answer
 
 
