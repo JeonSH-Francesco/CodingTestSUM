@@ -59,35 +59,39 @@ def rotate_90(puzzle):
                 count += 1
     return rotated, count
 
-# 메인 풀이 함수
 def solution(game_board, table):
     answer = 0
-    empty_blocks=find_blocks(game_board,0) #빈칸(0) 그룹
-    puzzles=find_blocks(game_board,1) #퍼즐(1) 그룹
     
-    #게임 보드의 각 빈칸 모양에 대해
-    #모든 퍼즐 조각을 하나씩 비교하며 맞는 조각이 있는지 확인
+    # 게임 보드에서 빈칸(0) 그룹 찾기
+    empty_blocks = find_blocks(game_board, 0)  # 각 빈 공간의 좌표 리스트 반환
+    
+    # 테이블에서 퍼즐(1) 그룹 찾기
+    puzzles = find_blocks(table, 1)  # 각 퍼즐 조각의 좌표 리스트 반환
+    
+    # 게임 보드의 각 빈칸 모양에 대해 반복
     for empty in empty_blocks:
-        target_shape = make_table(empty) # 빈칸 좌표 리스트
-        matched=False # 이 빈칸에 퍼즐을 맞췄는지 여부
+        target_shape = make_table(empty)  # 빈칸 좌표 리스트를 0과 1로 이루어진 테이블 형태로 변환
+        matched = False  # 이 빈칸에 맞는 퍼즐을 이미 채웠는지 여부 표시
         
-        #모든 퍼즐 조각을 하나씩 확인
+        # 모든 퍼즐 조각을 하나씩 확인
         for puzzle in puzzles:
-            puzzle_shape = make_table(puzzle)
+            puzzle_shape = make_table(puzzle)  # 퍼즐 좌표 리스트를 테이블 형태로 변환
             
-            #퍼즐을 0,90,180,270 도 회전하며 빈칸과 비교
+            # 퍼즐을 0, 90, 180, 270도 회전하며 빈칸과 비교
             for _ in range(4):
-                puzzle_shape, count = rotate_90(puzzle_shape) #90도 회전 + 블록 칸 수
+                puzzle_shape, count = rotate_90(puzzle_shape)  # 90도 회전 및 블록 칸 수 반환
                 
-                if puzzle_shape == target_shape: #모양이 정확히 일치하면
-                    answer+=count #점수(채운 칸 수) 추가
-                    puzzles.remove(puzzle) #사용한 퍼즐 제거
-                    matched=True #빈칸 채움 완료 표시
-                    break #회전 비교 중지
+                # 퍼즐 모양이 빈칸과 정확히 일치하면
+                if puzzle_shape == target_shape:
+                    answer += count  # 채운 칸 수를 점수로 추가
+                    puzzles.remove(puzzle)  # 사용한 퍼즐은 제거
+                    matched = True  # 빈칸 채움 완료 표시
+                    break  # 회전 비교 중지
                     
-                #matched가 True라면 이 빈칸은 이미 퍼즐로 채워졌으므로 
-                #같은 빈칸에 대해 더 이상 다른 퍼즐을 확인하지 않고 반복문 탈출
-                if matched:
-                    break
+            # matched가 True이면 이 빈칸은 이미 퍼즐로 채워졌으므로
+            # 다른 퍼즐을 확인하지 않고 다음 빈칸으로 이동
+            if matched:
+                break
         
-        return answer
+    # 모든 빈칸에 대해 퍼즐을 확인한 후 최종 점수 반환
+    return answer
